@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fff8ee" />
+  <title>Boo Basket Step Challenge</title>
+  <meta name="description" content="Join the Boo Basket Step Challenge: September 25–October 25. $2 entry. Most total steps wins the Boo Basket." />
+  <style>
+    :root{
+      --bg:#fff8ee; --card:#fffdf9; --ink:#241a24; --muted:#6f6570;
+      --orange:#ef7c28; --purple:#7c4ac7; --green:#3f7d58; --border:#eadfd3;
+      --shadow:0 12px 30px rgba(55,38,28,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink); background:
+        radial-gradient(circle at 10% 10%, rgba(239,124,40,.10), transparent 24rem),
+        radial-gradient(circle at 95% 20%, rgba(124,74,199,.10), transparent 26rem),
+        var(--bg);
+      line-height:1.55;
+    }
+    .wrap{width:min(100% - 32px, 980px); margin:auto}
+    header{padding:72px 0 42px; text-align:center}
+    .eyebrow{font-size:.86rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--purple)}
+    h1{font-size:clamp(2.5rem,8vw,5.6rem); line-height:.95; margin:14px 0 18px; letter-spacing:-.055em}
+    .sub{font-size:clamp(1.08rem,2.5vw,1.35rem); color:var(--muted); max-width:680px; margin:0 auto 28px}
+    .pills{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:24px 0 30px}
+    .pill{background:var(--card); border:1px solid var(--border); border-radius:999px; padding:9px 14px; font-weight:750; box-shadow:var(--shadow)}
+    .cta-row{display:flex; justify-content:center; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-block; text-decoration:none; border-radius:14px; padding:13px 18px; font-weight:850; border:1px solid transparent}
+    .btn-primary{background:var(--ink); color:white}
+    .btn-secondary{background:var(--card); color:var(--ink); border-color:var(--border)}
+    section{margin:18px 0 28px}
+    .card{background:rgba(255,253,249,.88); border:1px solid var(--border); border-radius:24px; padding:28px; box-shadow:var(--shadow); backdrop-filter:blur(6px)}
+    h2{font-size:1.6rem; margin:0 0 16px; letter-spacing:-.025em}
+    h3{margin:0 0 6px; font-size:1.05rem}
+    p{margin:8px 0}
+    .steps{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+    .step{padding:18px 14px; border-radius:18px; border:1px solid var(--border); background:#fff}
+    .num{display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#f4eadf; font-weight:900; margin-bottom:10px}
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .download{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .store{flex:1 1 220px; display:block; text-decoration:none; color:var(--ink); border:1px solid var(--border); background:#fff; padding:15px 16px; border-radius:16px; font-weight:800}
+    .store small{display:block; color:var(--muted); font-weight:600}
+    ul{padding-left:20px; margin-bottom:0}
+    li+li{margin-top:8px}
+    .callout{border-left:5px solid var(--orange); padding:14px 16px; background:#fff4e8; border-radius:12px; margin:16px 0 0}
+    .money{font-size:clamp(2.5rem,7vw,4.5rem); font-weight:950; letter-spacing:-.05em}
+    .muted{color:var(--muted)}
+    .timeline{display:grid; gap:10px}
+    .date{display:grid; grid-template-columns:125px 1fr; gap:14px; padding:12px 0; border-bottom:1px solid var(--border)}
+    .date:last-child{border-bottom:none}
+    .date strong{color:var(--purple)}
+    footer{text-align:center; color:var(--muted); padding:28px 0 56px; font-size:.92rem}
+    @media (max-width:760px){
+      header{padding-top:48px}
+      .steps,.two{grid-template-columns:1fr}
+      .date{grid-template-columns:1fr; gap:2px}
+      .card{padding:22px}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">Walk more • Win treats</div>
+    <h1>🎃 Boo Basket<br>Step Challenge 👟</h1>
+    <p class="sub">31 days. Most total steps wins. Every $2 entry goes toward building the winner's Boo Basket.</p>
+    <div class="pills">
+      <span class="pill">📅 Sept. 25 – Oct. 25</span>
+      <span class="pill">💵 $2 entry</span>
+      <span class="pill">🏆 Most steps wins</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#join">How to join</a>
+      <a class="btn btn-secondary" href="#rules">See the rules</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>👻 How it works</h2>
+      <div class="steps">
+        <div class="step"><span class="num">1</span><h3>Pay $2</h3><p class="muted">Your Venmo is your official RSVP.</p></div>
+        <div class="step"><span class="num">2</span><h3>Join StepUp</h3><p class="muted">Lilah adds you after payment.</p></div>
+        <div class="step"><span class="num">3</span><h3>Connect steps</h3><p class="muted">Use your phone, watch, or supported wearable.</p></div>
+        <div class="step"><span class="num">4</span><h3>Get walking</h3><p class="muted">Every step from Sept. 25–Oct. 25 counts.</p></div>
+        <div class="step"><span class="num">5</span><h3>Win treats</h3><p class="muted">Highest total wins the Boo Basket.</p></div>
+      </div>
+    </section>
+
+    <section class="two">
+      <div class="card" id="join">
+        <h2>🎟️ How to enter</h2>
+        <div class="money">$2</div>
+        <p><strong>Send your $2 entry to Lilah by September 19.</strong></p>
+        <div class="callout"><strong>Once Lilah receives your Venmo, you will be entered into the group chat on StepUp.</strong></div>
+        <p class="muted" style="margin-top:14px">Venmo: <strong>[ADD YOUR VENMO @USERNAME HERE]</strong></p>
+      </div>
+
+      <div class="card">
+        <h2>🏆 The Boo Basket</h2>
+        <p><strong>100% of entry fees</strong> go toward goodies for the winner's Boo Basket.</p>
+        <p>The more people who join, the bigger the prize gets. Candy, cozy fall stuff, Halloween goodies, snacks, and whatever else fits the budget. 👻</p>
+        <p class="muted"><strong>Current prize fund:</strong> $—</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>📱 Download StepUp</h2>
+      <p>We'll use <strong>StepUp Pedometer Step Counter</strong> as the official leaderboard and group chat. StepUp supports phone step tracking and syncing with a range of wearables.</p>
+      <div class="download">
+        <a class="store" href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825" target="_blank" rel="noopener">
+           Download for iPhone
+          <small>App Store • works with Apple Health / Apple Watch</small>
+        </a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup" target="_blank" rel="noopener">
+          ▶ Download for Android
+          <small>Google Play • supports Android and compatible wearables</small>
+        </a>
+      </div>
+      <div class="callout"><strong>Before Sept. 25:</strong> open StepUp, allow step/health permissions, connect your preferred device, and make sure today's steps are showing correctly.</div>
+    </section>
+
+    <section class="card" id="rules">
+      <h2>📜 Official rules</h2>
+      <ul>
+        <li><strong>Challenge dates:</strong> September 25 through October 25.</li>
+        <li><strong>Entry:</strong> $2, due to Lilah by September 19.</li>
+        <li><strong>Winner:</strong> the participant with the highest total step count in StepUp at the end of the challenge.</li>
+        <li><strong>Official tracker:</strong> StepUp is the source of truth for the leaderboard.</li>
+        <li>Walking and running both count. Normal daily movement counts too.</li>
+        <li>Use your phone, smartwatch, or supported wearable as long as it syncs into StepUp.</li>
+        <li>No intentionally adding, manipulating, or faking steps. Honor system — keep it fun.</li>
+        <li>If your device has a syncing problem, say something in the group chat as soon as you notice it.</li>
+        <li>All entry money goes toward the winner's Boo Basket.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>📅 Important dates</h2>
+      <div class="timeline">
+        <div class="date"><strong>Sept. 19</strong><span>Entry + Venmo deadline</span></div>
+        <div class="date"><strong>Sept. 20–24</strong><span>Join StepUp and make sure your steps sync correctly</span></div>
+        <div class="date"><strong>Sept. 25</strong><span>Challenge begins 🎃</span></div>
+        <div class="date"><strong>Oct. 25</strong><span>Final challenge day 🏁</span></div>
+        <div class="date"><strong>Oct. 26</strong><span>Winner announced 🏆</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🔐 Privacy & what others can see</h2>
+      <p>Your step activity is private by default in StepUp. Once you join the <strong>Boo Basket Step Challenge</strong> group, other members of that group will be able to see your relevant step activity and leaderboard ranking inside StepUp.</p>
+      <ul>
+        <li><strong>Before the challenge:</strong> if you join the group before September 25, other group members may be able to see your normal step activity during setup days.</li>
+        <li><strong>During the challenge:</strong> your step totals and ranking will be visible to other participants through the StepUp leaderboard.</li>
+        <li><strong>After the challenge:</strong> the group may continue showing ongoing step activity unless you leave it. If you do not want to keep sharing after October 25, you can leave the group once the winner is announced.</li>
+        <li><strong>Location:</strong> the challenge is based on step counts, not where you walked. StepUp does not use GPS location to count your steps.</li>
+      </ul>
+      <div class="callout"><strong>Good to know:</strong> joining the StepUp group means opting in to share your challenge-related step activity with the other participants.</div>
+    </section>
+
+
+    <section class="card">
+      <h2>❓ Quick FAQ</h2>
+      <p><strong>Can I run instead of walk?</strong><br>Yep. If StepUp records the steps, they count.</p>
+      <p><strong>Do I need an Apple Watch?</strong><br>No. Your phone can track steps too, and StepUp supports multiple wearable ecosystems.</p>
+      <p><strong>Can I join after September 19?</strong><br>Plan on September 19 being the cutoff so everyone is set up before the challenge begins.</p>
+      <p><strong>What happens if I forget my phone?</strong><br>If you use a connected wearable, it may still sync those steps. What ultimately appears in StepUp is what counts.</p>
+      <p><strong>Can other people see my steps?</strong><br>Yes, once you join the StepUp group, other participants can see your relevant step activity and leaderboard ranking. You can leave the group after the challenge if you no longer want to share.</p>
+      <p><strong>What's the prize?</strong><br>A Halloween Boo Basket purchased with the full entry pool. 👻</p>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Made for friends, steps, snacks, and extremely unnecessary competitive energy. 🎃
+  </footer>
+</body>
+</html>
