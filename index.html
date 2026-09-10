@@ -637,14 +637,15 @@
 
     .rules-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
 .rule-card {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  align-items: start;
 
   padding: 14px;
   background: #fbf5ea;
@@ -658,10 +659,8 @@
 }
 
 .rule-icon {
-  flex: 0 0 auto;
-
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
 
   display: grid;
   place-items: center;
@@ -669,20 +668,20 @@
   background: rgba(255, 255, 255, 0.55);
   border-radius: 10px;
 
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
 .rule-card h3 {
   margin: 0 0 4px;
-  font-size: 0.95rem;
-  line-height: 1.2;
+  font-size: 0.96rem;
+  line-height: 1.25;
 }
 
 .rule-card p {
   margin: 0;
 
   color: var(--muted);
-  font-size: 0.83rem;
+  font-size: 0.88rem;
   line-height: 1.45;
 }
 
@@ -690,23 +689,21 @@
   color: var(--ink);
 }
 
-.rule-card.full-width {
-  grid-column: 1 / -1;
-}
-
-/* Extra-small phones */
-@media (max-width: 390px) {
+/* Tablet / desktop */
+@media (min-width: 700px) {
   .rules-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .rule-card {
+    padding: 16px;
   }
 
   .rule-card.full-width {
-    grid-column: auto;
+    grid-column: 1 / -1;
   }
 }
-
-
-
     .rules {
       gap: 8px;
     }
@@ -824,10 +821,55 @@
       }
     }
 
+  
+
+    .countdown-banner {
+      width: fit-content;
+      max-width: calc(100% - 24px);
+      margin: 12px auto 0;
+      padding: 8px 13px;
+
+      background: var(--olive);
+      border: 1px solid #596136;
+      border-radius: 999px;
+
+      color: #fffdf7;
+
+      font-size: 0.82rem;
+      line-height: 1.2;
+      text-align: center;
+
+      box-shadow: 0 4px 10px rgba(69, 49, 31, 0.10);
+    }
+
+    .countdown-banner strong {
+      font-weight: 850;
+    }
+
+    .countdown-banner.join {
+      background: var(--rust);
+      border-color: #9f4c27;
+    }
+
+    .countdown-banner.live {
+      background: #6f5a86;
+      border-color: #5f4b72;
+    }
+
+    .countdown-banner.complete {
+      background: var(--brown);
+      border-color: #5f422f;
+    }
+
   </style>
 </head>
 
 <body>
+
+  <div id="page-status" class="countdown-banner">
+    ⏱️ <strong id="countdown-text">Loading countdown…</strong>
+  </div>
+
   <header class="hero wrap">
     <div class="eyebrow">31-Day Walking Challenge</div>
     <h1>Boo Basket<br />Step Challenge</h1>
@@ -944,6 +986,7 @@
             <span class="date-tag">October 25 · 11:59 PM</span>
             <h3>The Challenge Ends</h3>
             <p>At the end of October 25, the person with the highest total step count wins a Boo Basket made with the entire entry pool.</p>
+            <p><strong>Winner announced October 26.</strong></p>
           </div>
         </div>
       </div>
@@ -1082,6 +1125,65 @@
   </footer>
 
   <script>
+
+    function updateCountdown() {
+      const banner = document.getElementById("page-status");
+      const countdown = document.getElementById("countdown-text");
+      if (!banner || !countdown) return;
+
+      const now = new Date();
+
+      const entriesClose = new Date("2026-09-20T00:00:00-04:00");
+      const challengeStart = new Date("2026-09-25T00:00:00-04:00");
+      const challengeEnd = new Date("2026-10-25T23:59:59-04:00");
+
+      function countdownText(target, label) {
+        const diff = target - now;
+
+        if (diff <= 0) return label;
+
+        const totalHours = Math.floor(diff / (1000 * 60 * 60));
+
+        if (totalHours < 24) {
+          const hours = Math.max(1, totalHours);
+          return `${hours} ${hours === 1 ? "hour" : "hours"} ${label}`;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        return `${days} ${days === 1 ? "day" : "days"} ${label}`;
+      }
+
+      banner.className = "countdown-banner";
+
+      if (now < entriesClose) {
+        countdown.textContent = countdownText(
+          entriesClose,
+          "until entries close!"
+        );
+
+      } else if (now < challengeStart) {
+        countdown.textContent = countdownText(
+          challengeStart,
+          "until the challenge starts!"
+        );
+        banner.classList.add("join");
+
+      } else if (now <= challengeEnd) {
+        countdown.textContent = countdownText(
+          challengeEnd,
+          "until the challenge ends!"
+        );
+        banner.classList.add("live");
+
+      } else {
+        countdown.textContent = "Challenge complete!";
+        banner.classList.add("complete");
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60 * 1000);
+
     // UPDATE PARTICIPANT COUNT HERE //
     const PARTICIPANT_COUNT = 2;
     const ENTRY_FEE = 2;
