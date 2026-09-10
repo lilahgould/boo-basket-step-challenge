@@ -821,25 +821,29 @@
       }
     }
 
-  
-
     .countdown-banner {
+      position: sticky;
+      top: 10px;
+      z-index: 1000;
+
       width: fit-content;
       max-width: calc(100% - 24px);
+
       margin: 12px auto 0;
       padding: 8px 13px;
-
-      background: var(--olive);
-      border: 1px solid #596136;
+      
+      background: rgba(109, 116, 64, 0.32);
       border-radius: 999px;
 
-      color: #fffdf7;
+      color: var(--olive);
 
       font-size: 0.82rem;
       line-height: 1.2;
       text-align: center;
 
       box-shadow: 0 4px 10px rgba(69, 49, 31, 0.10);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .countdown-banner strong {
