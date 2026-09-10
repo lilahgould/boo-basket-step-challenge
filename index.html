@@ -574,21 +574,49 @@
       line-height: 1.5;
     }
 
-    .app-links {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-top: 10px;
-    }
 
-    .text-link {
-      display: block;
-      padding: 10px 12px;
-      background: #f6efe4;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      text-decoration: none;
-    }
+    .app-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.text-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 16px;
+
+  background: var(--olive);
+  color: white;
+
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+
+  box-shadow: 0 6px 14px rgba(69, 49, 31, 0.10);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.text-link:hover {
+  background: #5f6638;
+  box-shadow: 0 8px 18px rgba(69, 49, 31, 0.14);
+  transform: translateY(-1px);
+}
+
+.text-link:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(69, 49, 31, 0.10);
+}
 
     .event-card {
       padding-top: 20px;
@@ -605,6 +633,79 @@
       height: 40px;
       font-size: 1.15rem;
     }
+
+
+    .rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.rule-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+
+  padding: 14px;
+  background: #fbf5ea;
+  border: 1px solid #eadfce;
+  border-radius: 14px;
+}
+
+.rule-card.featured {
+  background: #f3eadf;
+  border-color: #dfc7ad;
+}
+
+.rule-icon {
+  flex: 0 0 auto;
+
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+
+  font-size: 1.15rem;
+}
+
+.rule-card h3 {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.rule-card p {
+  margin: 0;
+
+  color: var(--muted);
+  font-size: 0.83rem;
+  line-height: 1.45;
+}
+
+.rule-card strong {
+  color: var(--ink);
+}
+
+.rule-card.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Extra-small phones */
+@media (max-width: 390px) {
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rule-card.full-width {
+    grid-column: auto;
+  }
+}
+
+
 
     .rules {
       gap: 8px;
@@ -793,9 +894,15 @@
             <h3>Download StepUp & Connect Your Steps</h3>
             <p>Install StepUp, give it permission to access your step data, and connect your phone, smartwatch, or supported wearable. Make sure your steps are showing correctly.</p>
             <div class="app-links">
-              <a class="text-link" href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825" target="_blank" rel="noopener">iPhone / App Store</a>
-              <a class="text-link" href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup" target="_blank" rel="noopener">Android / Google Play</a>
-            </div>
+
+              <a class="text-link" href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825" target="_blank" rel="noopener">
+                Download StepUp for iPhone
+              </a>
+              
+              <a class="text-link" href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup" target="_blank" rel="noopener">
+                Download StepUp for Android
+              </a>
+</div>
           </div>
         </div>
 
@@ -804,7 +911,7 @@
           <div>
             <span class="date-tag">September 20</span>
             <h3>Join the StepUp Group</h3>
-            <p>On September 20, the link to join <strong>“Boo Basket Step Challenge 🎃”</strong> will be posted right here on this page. You’ll have a few days to join the group and make sure everything is tracking correctly before the challenge starts.</p>
+            <p>On September 20, the link to join <strong>“Boo Basket Step Challenge 🎃”</strong> will be posted right here on this page. You’ll have a few days to join the group and make sure everything is tracking correctly before the challenge starts. You may see step totals before September 25 after joining the group. Don’t worry, only steps included in the official Sept. 25–Oct. 25 challenge leaderboard count toward the Boo Basket.</p>
 
             <!-- <div class="stepup-join-card">
               <div class="join-label">StepUp Group Link</div>
@@ -842,22 +949,80 @@
       </div>
     </section>
 
-    <section class="card" id="rules">
-      <h2>Rules</h2>
-
-      <ul class="rules">
-        <li><strong>Challenge window:</strong> Steps count from September 25 at 12:00 AM through October 25 at 11:59 PM.</li>
-        <li><strong>Eligibility:</strong> Only participants who paid the $2 entry fee by the deadline are eligible to win the Boo Basket.</li>
-        <li><strong>Official results:</strong> The winner will be determined by the final StepUp leaderboard statistics for the challenge period.</li>
-        <li><strong>What counts:</strong> Only steps tracked and recorded in StepUp during the official challenge window count toward your total.</li>
-        <li><strong>No manual entries:</strong> Manually added, edited, fabricated, or intentionally manipulated steps are not allowed.</li>
-        <li><strong>Devices:</strong> Phones, smartwatches, and supported wearables are allowed as long as they sync correctly with StepUp.</li>
-        <li><strong>Sync responsibility:</strong> Participants are responsible for making sure their device is connected and StepUp is tracking properly throughout the challenge.</li>
-        <li><strong>Ties:</strong> If two or more participants finish with the exact same step total, the Boo Basket prize will be split or a simple tie-breaker will be agreed on by the tied participants.</li>
-        <li><strong>Prize:</strong> 100% of entry fees will be used to create the winner’s Boo Basket.</li>
-        <li><strong>Keep it fair:</strong> The challenge runs on the honor system. Have fun, move more, it's not that deep.</li>
-      </ul>
-    </section>
+      <section class="card" id="rules">
+        <h2>Rules & Features</h2>
+      
+        <div class="rules-grid">
+      
+          <div class="rule-card featured">
+            <div class="rule-icon">📅</div>
+            <div>
+              <h3>Challenge Window</h3>
+              <p>Steps count from <strong>September 25 at 12:00 AM</strong> through <strong>October 25 at 11:59 PM</strong>.</p>
+                </div>
+          </div>
+      
+          <div class="rule-card featured">
+            <div class="rule-icon">🎭</div>
+            <div>
+              <h3>Mystery Mode</h3>
+              <p>Today’s step counts stay hidden while ranks remain visible. Step totals are revealed the following day.</p>
+            </div>
+          </div>
+      
+          <div class="rule-card">
+            <div class="rule-icon">🎟️</div>
+            <div>
+              <h3>Eligibility</h3>
+              <p>Only participants who paid the $2 entry fee by the deadline are eligible to win.</p>
+            </div>
+          </div>
+      
+          <div class="rule-card">
+            <div class="rule-icon">🏆</div>
+            <div>
+              <h3>Official Results</h3>
+              <p>
+                StepUp may display Today, Yesterday, and Week statistics before and during the challenge. The winner will be determined solely by the custom September 25–October 25 challenge leaderboard.</p>
+         
+              </p>
+            </div>
+          </div>
+      
+          <div class="rule-card">
+            <div class="rule-icon">👟</div>
+            <div>
+              <h3>What Counts</h3>
+              <p>Only steps tracked and recorded in StepUp during the official challenge window count.</p>
+            </div>
+          </div>
+      
+          <div class="rule-card">
+            <div class="rule-icon">🚫</div>
+            <div>
+              <h3>No Manual Entries</h3>
+              <p>Manually added, edited, fabricated, or intentionally manipulated steps are not allowed.</p>
+            </div>
+          </div>
+      
+          <div class="rule-card">
+            <div class="rule-icon">⌚</div>
+            <div>
+              <h3>Devices</h3>
+              <p>Phones, smartwatches, and supported wearables are allowed as long as they sync correctly with StepUp.</p>
+            </div>
+          </div>
+ 
+          <div class="rule-card">
+            <div class="rule-icon">✨</div>
+            <div>
+              <h3>Keep It Fair</h3>
+              <p>The challenge runs on the honor system. Have fun, move more, it’s not that deep.</p>
+            </div>
+          </div>
+      
+        </div>
+      </section>
 
     <section class="card">
       <h2>FAQ</h2>
