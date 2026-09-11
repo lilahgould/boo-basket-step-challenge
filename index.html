@@ -8,415 +8,937 @@
   <title>Boo Basket Step Challenge</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
-    :root{--cream:#fbf4e7;--paper:#fffaf2;--caramel:#9b5c31;--brown:#513422;--orange:#dd6b28;--peach:#f0b27b;--gold:#e8ad35;--sage:#788266;--ink:#403126;--muted:#7b6a5d;--line:#ead8c3;--shadow:0 12px 30px rgba(91,55,28,.1)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--cream);font-family:"DM Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 0 8%,rgba(232,173,53,.16),transparent 19rem),radial-gradient(circle at 100% 42%,rgba(221,107,40,.12),transparent 23rem)}a{color:inherit}.wrap{width:min(100% - 28px,480px);margin:auto}
-    .status{position:sticky;top:0;z-index:20;padding:calc(9px + env(safe-area-inset-top)) 14px 9px;color:#fff;background:var(--caramel);text-align:center;font-size:.82rem;font-weight:700}.status.live{background:var(--orange)}.status.complete{background:var(--sage)}
-    header{padding:27px 0 18px;text-align:center}.floral{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:11px;font-size:1.45rem}.floral span:nth-child(2){font-size:2.65rem}.eyebrow{margin:0 0 8px;color:var(--caramel);font-size:.7rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}h1,h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400}h1{margin:0;color:var(--brown);font-size:clamp(3rem,14vw,4.8rem);line-height:.84;letter-spacing:-.045em}h1 em{display:block;color:var(--orange);font-size:.65em;font-weight:400}.intro{max-width:380px;margin:17px auto 0;color:var(--muted);font-size:.94rem}.intro strong{color:var(--ink)}.little-things{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-top:17px}.pill{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:.72rem;font-weight:700}
-    main{padding-bottom:40px}section{margin:13px 0}.card{padding:20px 18px;border:1px solid var(--line);border-radius:22px;background:rgba(255,250,242,.96);box-shadow:var(--shadow)}h2{margin:0 0 14px;color:var(--brown);font-size:1.8rem;line-height:1.05}.section-note{display:block;margin-bottom:5px;color:var(--orange);font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}h3{margin:0 0 5px;font-size:.96rem;line-height:1.3}p{margin:0}
-    .stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.stat {
-  min-width: 0;
-  padding: 18px 12px 16px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--paper);
-  box-shadow: 0 7px 18px rgba(91, 55, 28, 0.07);
-  text-align: center;
-}
-
-.stat:first-child {
-  background: #fff8e8;
-}
-
-.stat:last-child {
-  background: #fbeddf;
-}
-
-.stat-title {
-  color: var(--caramel);
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.stat-value {
-  margin: 7px 0 5px;
-  color: var(--orange);
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: clamp(2.2rem, 11vw, 3rem);
-  line-height: 0.9;
-}
-
-.stat-label {
-  color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 600;
-  line-height: 1.25;
-  text-transform: none;
-  letter-spacing: 0;
-}
-    .join{position:relative;overflow:hidden;padding:0;border-color:#e4c39d}.join:before{content:"";position:absolute;right:-8px;top:-13px;font-size:4.4rem;opacity:.18;transform:rotate(14deg)}.join-copy{position:relative;padding:21px 18px 17px}.join h2{color:var(--orange);font-size:2rem}.handle{margin:0 0 8px;color:var(--brown);font-family:"DM Serif Display",serif;font-size:1.32rem}.small{color:var(--muted);font-size:.86rem}.button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:57px;padding:0 18px;color:#fff;background:var(--orange);text-decoration:none;font-weight:700}.button:active{filter:brightness(.9)}
-    .steps{display:grid;gap:18px;counter-reset:step}.step{position:relative;display:grid;grid-template-columns:40px 1fr;gap:11px}.step:not(:last-child):after{content:"";position:absolute;left:19px;top:41px;bottom:-17px;border-left:1px dashed #d6b48e}.step:before{counter-increment:step;content:counter(step);z-index:1;display:grid;place-items:center;width:39px;height:39px;color:#fff;background:var(--caramel);border-radius:50%;font-family:"DM Serif Display",serif;font-size:1.2rem}.step p{color:var(--muted);font-size:.85rem}.step p+p{margin-top:6px}.step strong{color:var(--ink)}
-    .dates{display:grid;gap:8px}.date{display:grid;grid-template-columns:50px 1fr;gap:12px;align-items:center;padding:12px 13px;border-radius:15px;background:#f8ead8}.date:nth-child(2){background:#f9e2d6}.date:nth-child(3){background:#f7edc9}.date-icon{font-size:1.65rem;text-align:center}.date-tag{color:var(--orange);font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.date p{color:var(--muted);font-size:.79rem}
-    .rules{display:grid;gap:1px}.rule{display:grid;grid-template-columns:34px 1fr;gap:9px;padding:13px 2px;border-bottom:1px solid var(--line)}.rule:last-child{border-bottom:0}.rule-icon{font-size:1.15rem}.rule p{color:var(--muted);font-size:.79rem;line-height:1.4}
-    details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{position:relative;padding:14px 29px 14px 0;list-style:none;cursor:pointer;font-weight:700;font-size:.9rem}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:4px;color:var(--orange);font-size:1.2rem}details[open] summary:after{content:"−"}details p{padding:0 24px 15px 0;color:var(--muted);font-size:.84rem}
-    .contact{text-align:center;background:var(--brown);border:0;color:#fff}.contact h2{color:#fff}.contact p{color:#e8dbd0}.contact a{display:inline-block;margin-top:9px;color:#ffd787;font-weight:700}footer{padding:9px 0 calc(31px + env(safe-area-inset-bottom));color:#968273;text-align:center;font-size:.72rem}
-    @media(min-width:720px){.wrap{width:min(100% - 48px,820px)}header{padding-top:45px}.dates{grid-template-columns:repeat(3,1fr)}.date{grid-template-columns:1fr;text-align:center}.rules{grid-template-columns:1fr 1fr;gap:0 22px}.rule:nth-last-child(2){border-bottom:0}.card{padding:26px}.stats{gap:14px}}
-
-    /* Enhanced fall styling */
+    :root {
+      --cream:#fbf4e7;
+      --paper:#fffaf2;
+      --caramel:#9b5c31;
+      --brown:#513422;
+      --orange:#dd6b28;
+      --peach:#f0b27b;
+      --gold:#e8ad35;
+      --sage:#788266;
+      --ink:#403126;
+      --muted:#7b6a5d;
+      --line:#ead8c3;
+      --shadow:0 12px 30px rgba(91,55,28,.1);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
+      margin:0;
+      color:var(--ink);
       background:
-        radial-gradient(circle at 12% 4%, rgba(232, 173, 53, .20), transparent 17rem),
-        radial-gradient(circle at 105% 28%, rgba(221, 107, 40, .13), transparent 23rem),
-        linear-gradient(180deg, #fbf4e7 0%, #f8eddf 100%);
+        radial-gradient(circle at 12% 4%, rgba(232,173,53,.20), transparent 17rem),
+        radial-gradient(circle at 105% 28%, rgba(221,107,40,.13), transparent 23rem),
+        linear-gradient(180deg,#fbf4e7 0%,#f8eddf 100%);
+      font-family:"DM Sans",system-ui,sans-serif;
+      font-size:16px;
+      line-height:1.55;
+      overflow-x:hidden;
     }
-
-    .wrap { width: min(100% - 30px, 500px); }
-
+    body::before {
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 0 8%,rgba(232,173,53,.16),transparent 19rem),
+        radial-gradient(circle at 100% 42%,rgba(221,107,40,.12),transparent 23rem);
+    }
+    a { color:inherit; }
+    .wrap {
+      width:min(100% - 30px,500px);
+      margin:auto;
+    }
     .status {
-      box-shadow: 0 5px 18px rgba(81, 52, 34, .17);
-      letter-spacing: .025em;
+      position:sticky;
+      top:0;
+      z-index:20;
+      padding:calc(9px + env(safe-area-inset-top)) 14px 9px;
+      color:#fff;
+      background:var(--caramel);
+      box-shadow:0 5px 18px rgba(81,52,34,.17);
+      text-align:center;
+      font-size:.82rem;
+      font-weight:700;
+      letter-spacing:.025em;
     }
-
+    .status.live { background:var(--orange); }
+    .status.complete { background:var(--sage); }
     header {
-      position: relative;
-      padding: 32px 10px 28px;
+      position:relative;
+      padding:32px 10px 28px;
+      text-align:center;
     }
-
     header::before,
     header::after {
-      position: absolute;
-      z-index: -1;
-      font-size: 3.5rem;
-      opacity: .11;
+      position:absolute;
+      z-index:-1;
+      font-size:3.5rem;
+      opacity:.11;
     }
-
-    header::before { content: "🌻"; left: -18px; top: 40px; transform: rotate(-18deg); }
-    header::after { content: "🎃"; right: -18px; bottom: 24px; transform: rotate(12deg); }
-
+    header::before {
+      content:"🌻";
+      left:-18px;
+      top:40px;
+      transform:rotate(-18deg);
+    }
+    header::after {
+      content:"🎃";
+      right:-18px;
+      bottom:24px;
+      transform:rotate(12deg);
+    }
     .floral {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 0 0 12px;
-      font-size: 1.35rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin:0 0 12px;
+      font-size:1.35rem;
     }
-
     .floral-main {
-      display: grid;
-      place-items: center;
-      width: 64px;
-      height: 64px;
-      border: 1px solid #ecd6b6;
-      border-radius: 50%;
-      background: #fff9ed;
-      box-shadow: 0 8px 22px rgba(91, 55, 28, .10);
-      font-size: 2.4rem;
+      display:grid;
+      place-items:center;
+      width:64px;
+      height:64px;
+      border:1px solid #ecd6b6;
+      border-radius:50%;
+      background:#fff9ed;
+      box-shadow:0 8px 22px rgba(91,55,28,.10);
+      font-size:2.4rem;
     }
-
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 11px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: #f3e4cd;
-      letter-spacing: .19em;
+      display:inline-block;
+      margin:0 0 11px;
+      padding:5px 10px;
+      border-radius:999px;
+      color:var(--caramel);
+      background:#f3e4cd;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:.19em;
+      text-transform:uppercase;
     }
-
+    h1,
+    h2 {
+      font-family:"DM Serif Display",Georgia,serif;
+      font-weight:400;
+    }
     h1 {
-      text-shadow: 0 2px 0 rgba(255, 255, 255, .9);
+      margin:0;
+      color:var(--brown);
+      font-size:clamp(3rem,14vw,4.8rem);
+      line-height:.84;
+      letter-spacing:-.045em;
+      text-shadow:0 2px 0 rgba(255,255,255,.9);
     }
-
-    h1 em { margin-top: 6px; }
-
+    h1 em {
+      display:block;
+      margin-top:6px;
+      color:var(--orange);
+      font-size:.65em;
+      font-weight:400;
+    }
     .intro {
-      max-width: 410px;
-      font-size: 1rem;
-      line-height: 1.6;
+      max-width:410px;
+      margin:17px auto 0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.6;
     }
-
-    .little-things { gap: 8px; margin-top: 20px; }
-
-    .pill {
-      padding: 8px 11px;
-      border-color: #e5cfb2;
-      background: rgba(255, 250, 242, .88);
-      box-shadow: 0 4px 10px rgba(91, 55, 28, .06);
+    .intro strong { color:var(--ink); }
+    .app-downloads {
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
     }
-
-    main { padding-bottom: 46px; }
-    section { margin: 16px 0; }
-
+    .app-button {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:155px;
+      padding:10px 14px;
+      border:1px solid #3f2d21;
+      border-radius:13px;
+      color:#fff;
+      background:var(--brown);
+      box-shadow:0 7px 16px rgba(81,52,34,.16);
+      text-align:left;
+      text-decoration:none;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+    }
+    .app-button:hover {
+      transform:translateY(-2px);
+      background:#60402c;
+      box-shadow:0 10px 21px rgba(81,52,34,.2);
+    }
+    .app-button:active {
+      transform:scale(.98);
+    }
+    .app-icon {
+      display:grid;
+      place-items:center;
+      width:31px;
+      height:31px;
+      flex:0 0 31px;
+      border-radius:9px;
+      background:rgba(255,255,255,.12);
+      font-size:1.3rem;
+      line-height:1;
+    }
+    .app-button span:last-child {
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+    .app-button small {
+      margin-bottom:2px;
+      font-size:.58rem;
+      font-weight:600;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      opacity:.8;
+    }
+    .app-button strong {
+      font-size:.9rem;
+      font-weight:700;
+    }
+    main { padding-bottom:46px; }
+    section { margin:16px 0; }
     .card {
-      position: relative;
-      padding: 23px 20px;
-      border-color: #e5d1b9;
-      box-shadow: 0 13px 32px rgba(91, 55, 28, .105);
+      position:relative;
+      padding:23px 20px;
+      border:1px solid #e5d1b9;
+      border-radius:22px;
+      background:rgba(255,250,242,.96);
+      box-shadow:0 13px 32px rgba(91,55,28,.105);
     }
-
     .card:not(.join):not(.contact)::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      top: 0;
-      width: 42px;
-      height: 4px;
-      border-radius: 0 0 999px 999px;
-      background: var(--orange);
+      content:"";
+      position:absolute;
+      left:20px;
+      top:0;
+      width:42px;
+      height:4px;
+      border-radius:0 0 999px 999px;
+      background:var(--orange);
     }
-
-    h2 { font-size: 1.95rem; letter-spacing: -.025em; }
-
+    h2 {
+      margin:0 0 14px;
+      color:var(--brown);
+      font-size:1.95rem;
+      line-height:1.05;
+      letter-spacing:-.025em;
+    }
     .section-note {
-      margin-bottom: 7px;
-      color: var(--caramel);
-      letter-spacing: .15em;
+      display:block;
+      margin-bottom:7px;
+      color:var(--caramel);
+      font-size:.68rem;
+      font-weight:700;
+      letter-spacing:.15em;
+      text-transform:uppercase;
     }
-
-    .stats { gap: 11px; }
-
+    h3 {
+      margin:0 0 5px;
+      color:var(--brown);
+      font-size:.96rem;
+      line-height:1.3;
+    }
+    p { margin:0; }
+    .stats {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:11px;
+    }
     .stat {
-      position: relative;
-      overflow: hidden;
-      min-height: 138px;
-      padding: 20px 11px 17px;
-      border-color: #e5cfb0;
-      box-shadow: 0 9px 22px rgba(91, 55, 28, .09);
+      position:relative;
+      overflow:hidden;
+      min-width:0;
+      min-height:138px;
+      padding:20px 11px 17px;
+      border:1px solid #e5cfb0;
+      border-radius:18px;
+      background:var(--paper);
+      box-shadow:0 9px 22px rgba(91,55,28,.09);
+      text-align:center;
     }
-
+    .stat:first-child { background:#fff8e8; }
+    .stat:last-child { background:#fbeddf; }
     .stat::after {
-      content: "";
-      position: absolute;
-      right: -25px;
-      bottom: -30px;
-      width: 75px;
-      height: 75px;
-      border-radius: 50%;
-      background: rgba(232, 173, 53, .13);
+      content:"";
+      position:absolute;
+      right:-25px;
+      bottom:-30px;
+      width:75px;
+      height:75px;
+      border-radius:50%;
+      background:rgba(232,173,53,.13);
     }
-
-    .stat:last-child::after { background: rgba(221, 107, 40, .12); }
-
+    .stat:last-child::after {
+      background:rgba(221,107,40,.12);
+    }
     .stat-title {
-      color: var(--brown);
-      font-size: .75rem;
-      letter-spacing: .12em;
+      color:var(--brown);
+      font-size:.75rem;
+      font-weight:700;
+      line-height:1.2;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
-
     .stat-value {
-      margin: 10px 0 7px;
-      font-size: clamp(2.55rem, 12vw, 3.2rem);
+      margin:10px 0 7px;
+      color:var(--orange);
+      font-family:"DM Serif Display",Georgia,serif;
+      font-size:clamp(2.55rem,12vw,3.2rem);
+      line-height:.9;
     }
-
-    .stat-label { position: relative; z-index: 1; min-height: 2.2em; }
-
+    .stat-label {
+      position:relative;
+      z-index:1;
+      min-height:2.2em;
+      color:var(--muted);
+      font-size:.7rem;
+      font-weight:600;
+      line-height:1.25;
+    }
     .join {
-      border-color: #dfb98e;
-      box-shadow: 0 15px 34px rgba(139, 79, 35, .14);
+      position:relative;
+      overflow:hidden;
+      padding:0;
+      border-color:#dfb98e;
+      box-shadow:0 15px 34px rgba(139,79,35,.14);
     }
-
     .join::before {
-      content: "🌻";
-      right: -13px;
-      top: -18px;
-      opacity: .14;
-      font-size: 5.5rem;
+      content:"🌻";
+      position:absolute;
+      right:-13px;
+      top:-18px;
+      font-size:5.5rem;
+      opacity:.14;
+      transform:rotate(14deg);
     }
-
-    .join-copy { padding: 24px 20px 21px; }
-    .join h2 { font-size: 2.2rem; }
-
+    .join-copy {
+      position:relative;
+      padding:24px 20px 21px;
+    }
+    .join h2 {
+      color:var(--orange);
+      font-size:2.2rem;
+    }
     .handle {
-      display: inline-block;
-      margin: 1px 0 11px;
-      padding-bottom: 2px;
-      border-bottom: 2px solid #efc697;
+      display:inline-block;
+      margin:1px 0 11px;
+      padding-bottom:2px;
+      border-bottom:2px solid #efc697;
+      color:var(--brown);
+      font-family:"DM Serif Display",serif;
+      font-size:1.32rem;
     }
-
+    .small {
+      color:var(--muted);
+      font-size:.875rem;
+    }
     .button {
-      min-height: 61px;
-      background: linear-gradient(135deg, #dd6b28, #c9541e);
-      box-shadow: inset 0 1px rgba(255, 255, 255, .2);
-      transition: transform .18s ease, filter .18s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      min-height:61px;
+      padding:0 18px;
+      color:#fff;
+      background:linear-gradient(135deg,#dd6b28,#c9541e);
+      box-shadow:inset 0 1px rgba(255,255,255,.2);
+      text-decoration:none;
+      font-weight:700;
+      transition:transform .18s ease,filter .18s ease;
     }
-
-    .button:hover { filter: brightness(1.05); }
-    .button:active { transform: scale(.985); }
-
-    .steps { gap: 20px; }
-    .step { grid-template-columns: 43px 1fr; gap: 13px; }
-    .step::before { width: 42px; height: 42px; box-shadow: 0 5px 12px rgba(81, 52, 34, .16); }
-    .step:not(:last-child)::after { left: 20px; top: 43px; border-left: 2px dotted #d9b78e; }
-    .step h3, .rule h3, .date h3 { color: var(--brown); }
-    .step p, .rule p, .date p, .small, details p { font-size: .875rem; }
-
-    .dates { gap: 10px; }
-
+    .button:hover { filter:brightness(1.05); }
+    .button:active { transform:scale(.985); }
+    .steps {
+      display:grid;
+      gap:20px;
+      counter-reset:step;
+    }
+    .step {
+      position:relative;
+      display:grid;
+      grid-template-columns:43px 1fr;
+      gap:13px;
+    }
+    .step:not(:last-child)::after {
+      content:"";
+      position:absolute;
+      left:20px;
+      top:43px;
+      bottom:-17px;
+      border-left:2px dotted #d9b78e;
+    }
+    .step::before {
+      counter-increment:step;
+      content:counter(step);
+      z-index:1;
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      color:#fff;
+      background:var(--caramel);
+      border-radius:50%;
+      box-shadow:0 5px 12px rgba(81,52,34,.16);
+      font-family:"DM Serif Display",serif;
+      font-size:1.2rem;
+    }
+    .step p {
+      color:var(--muted);
+      font-size:.875rem;
+    }
+    .step p + p { margin-top:6px; }
+    .step strong { color:var(--ink); }
+    .dates {
+      display:grid;
+      gap:10px;
+    }
     .date {
-      min-height: 88px;
-      padding: 14px;
-      border: 1px solid rgba(188, 126, 74, .12);
-      box-shadow: 0 5px 14px rgba(91, 55, 28, .045);
+      display:grid;
+      grid-template-columns:50px 1fr;
+      gap:12px;
+      align-items:center;
+      min-height:88px;
+      padding:14px;
+      border:1px solid rgba(188,126,74,.12);
+      border-radius:15px;
+      background:#f8ead8;
+      box-shadow:0 5px 14px rgba(91,55,28,.045);
     }
-
+    .date:nth-child(2) { background:#f9e2d6; }
+    .date:nth-child(3) { background:#f7edc9; }
     .date-icon {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .55);
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:rgba(255,255,255,.55);
+      font-size:1.65rem;
+      text-align:center;
     }
-
-    .date-tag { font-size: .7rem; }
-
-    .rules { gap: 8px; }
-
+    .date-tag {
+      color:var(--orange);
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+    .date p {
+      color:var(--muted);
+      font-size:.875rem;
+    }
+    .rules {
+      display:grid;
+      gap:8px;
+    }
     .rule {
-      padding: 14px 13px;
-      border: 0;
-      border-radius: 13px;
-      background: #fbf0e1;
+      display:grid;
+      grid-template-columns:34px 1fr;
+      gap:9px;
+      padding:14px 13px;
+      border:0;
+      border-radius:13px;
+      background:#fbf0e1;
     }
-
-    .rule:nth-child(even) { background: #f8ead8; }
-
+    .rule:nth-child(even) {
+      background:#f8ead8;
+    }
     .rule-icon {
-      display: grid;
-      place-items: center;
-      width: 31px;
-      height: 31px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .68);
-      font-size: 1rem;
+      display:grid;
+      place-items:center;
+      width:31px;
+      height:31px;
+      border-radius:50%;
+      background:rgba(255,255,255,.68);
+      font-size:1rem;
     }
-
-    details { border-color: #ead8c3; }
-    details:first-of-type { margin-top: 2px; }
-    summary { padding: 16px 31px 16px 2px; }
-    summary::after { right: 5px; font-size: 1.4rem; }
-    details[open] summary { color: var(--orange); }
-
+    .rule p {
+      color:var(--muted);
+      font-size:.875rem;
+      line-height:1.4;
+    }
+    details {
+      border-top:1px solid #ead8c3;
+    }
+    details:first-of-type { margin-top:2px; }
+    details:last-child {
+      border-bottom:1px solid var(--line);
+    }
+    summary {
+      position:relative;
+      padding:16px 31px 16px 2px;
+      list-style:none;
+      cursor:pointer;
+      font-weight:700;
+      font-size:.9rem;
+    }
+    summary::-webkit-details-marker {
+      display:none;
+    }
+    summary::after {
+      content:"+";
+      position:absolute;
+      right:5px;
+      color:var(--orange);
+      font-size:1.4rem;
+    }
+    details[open] summary {
+      color:var(--orange);
+    }
+    details[open] summary::after {
+      content:"−";
+    }
+    details p {
+      padding:0 24px 15px 0;
+      color:var(--muted);
+      font-size:.875rem;
+    }
     .contact {
-      padding: 26px 20px;
-      background: linear-gradient(145deg, #5d3b26, #432a1c);
-      box-shadow: 0 13px 30px rgba(66, 40, 24, .2);
+      padding:26px 20px;
+      border:0;
+      color:#fff;
+      background:linear-gradient(145deg,#5d3b26,#432a1c);
+      box-shadow:0 13px 30px rgba(66,40,24,.2);
+      text-align:center;
     }
-
-    .contact h2 { margin-bottom: 8px; }
-    .contact a { padding: 5px 0; }
-
-    @media (min-width: 720px) {
-      .wrap { width: min(100% - 48px, 850px); }
-      header { padding-top: 50px; }
-      .stats { gap: 16px; }
-      .stat { min-height: 150px; }
-      .rules { gap: 9px 12px; }
-      .rule { border-bottom: 0; }
-      .card { padding: 29px; }
-      .card:not(.join):not(.contact)::before { left: 29px; }
+    .contact h2 {
+      margin-bottom:8px;
+      color:#fff;
     }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .floral-main { animation: gentle-float 4s ease-in-out infinite; }
-      @keyframes gentle-float { 50% { transform: translateY(-4px) rotate(3deg); } }
+    .contact p {
+      color:#e8dbd0;
+    }
+    .contact a {
+      display:inline-block;
+      margin-top:9px;
+      padding:5px 0;
+      color:#ffd787;
+      font-weight:700;
+    }
+    footer {
+      padding:9px 0 calc(31px + env(safe-area-inset-bottom));
+      color:#968273;
+      text-align:center;
+      font-size:.72rem;
+    }
+    @media (max-width:380px) {
+      .app-downloads {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+      }
+      .app-button {
+        min-width:0;
+        padding:9px 10px;
+      }
+      .app-icon {
+        width:28px;
+        height:28px;
+        flex-basis:28px;
+      }
+    }
+    @media (min-width:720px) {
+      .wrap {
+        width:min(100% - 48px,850px);
+      }
+      header {
+        padding-top:50px;
+      }
+      .dates {
+        grid-template-columns:repeat(3,1fr);
+      }
+      .date {
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+      .date-icon {
+        margin:auto;
+      }
+      .rules {
+        grid-template-columns:1fr 1fr;
+        gap:9px 12px;
+      }
+      .card {
+        padding:29px;
+      }
+      .card:not(.join):not(.contact)::before {
+        left:29px;
+      }
+      .stats {
+        gap:16px;
+      }
+      .stat {
+        min-height:150px;
+      }
+    }
+    @media (prefers-reduced-motion:no-preference) {
+      .floral-main {
+        animation:gentle-float 4s ease-in-out infinite;
+      }
+      @keyframes gentle-float {
+        50% {
+          transform:translateY(-4px) rotate(3deg);
+        }
+      }
     }
   </style>
 </head>
 <body>
-  <div id="page-status" class="status" role="status"> <span id="countdown-text">Loading countdown…</span></div>
+  <div id="page-status" class="status" role="status">
+    <span id="countdown-text">Loading countdown…</span>
+  </div>
   <header class="wrap">
-    <div class="floral" aria-hidden="true"><span>🍂</span><span class="floral-main">🌻</span><span>🎃</span></div>
+    <div class="floral" aria-hidden="true">
+      <span>🍂</span>
+      <span class="floral-main">🌻</span>
+      <span>🎃</span>
+    </div>
     <p class="eyebrow">2026</p>
-    <h1>Boo Basket <em>Step Challenge</em></h1>
-    <p class="intro">Walk the most steps from <strong>September 25 through October 25</strong> and win a Boo Basket funded by everyone’s entry fees.</p>
-    <div class="little-things" aria-label="Challenge highlights"><span class="pill">👟 31 days</span><span class="pill">🎟️ $2 entry</span><span class="pill">🏆 Most steps wins</span></div>
+    <h1>
+      Boo Basket
+      <em>Step Challenge</em>
+    </h1>
+    <p class="intro">
+      Walk the most steps from <strong>September 25 through October 25</strong>
+      and win a Boo Basket funded by everyone’s entry fees.
+    </p>
+    <div class="app-downloads" aria-label="Download the StepUp app">
+      <a
+        class="app-button"
+        href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download StepUp on the Apple App Store"
+      >
+        <span class="app-icon" aria-hidden="true"></span>
+        <span>
+          <small>Download on the</small>
+          <strong>App Store</strong>
+        </span>
+      </a>
+      <a
+        class="app-button"
+        href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Get StepUp on Google Play"
+      >
+        <span class="app-icon" aria-hidden="true">▶</span>
+        <span>
+          <small>Get it on</small>
+          <strong>Google Play</strong>
+        </span>
+      </a>
+    </div>
   </header>
   <main class="wrap">
-<!-- Update PARTICIPANT_COUNT near the bottom. Prize = participants × $2. -->
-<section class="stats" aria-label="Current challenge totals">
-    <div class="stat">
-      <div class="stat-title">Participants</div>
-      <div class="stat-value" id="participant-count">0</div>
-      <div class="stat-label">and counting</div>
-    </div>
-  
-    <div class="stat">
-      <div class="stat-title">Prize Fund</div>
-      <div class="stat-value">$<span id="prize-value">0</span></div>
-      <div class="stat-label">More players = better prizes!</div>
-    </div>
-  </section>
-
+    <!-- Update PARTICIPANT_COUNT near the bottom. Prize = participants × $2. -->
+    <section class="stats" aria-label="Current challenge totals">
+      <div class="stat">
+        <div class="stat-title">Participants</div>
+        <div class="stat-value" id="participant-count">0</div>
+        <div class="stat-label">and counting</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Prize Fund</div>
+        <div class="stat-value">$<span id="prize-value">0</span></div>
+        <div class="stat-label">More players = better prizes!</div>
+      </div>
+    </section>
     <section class="card join" aria-labelledby="join-title">
-      <div class="join-copy"><span class="section-note">Enter by September 24</span><h2 id="join-title">How to Join</h2><p class="handle">Venmo Lilah · @Lilah-Gould</p><p class="small">Send $2 and include the phone number or email where you’d like your private StepUp invite. Make the payment private if it includes contact information.</p></div>
-      <a class="button" href="https://venmo.com/u/Lilah-Gould" target="_blank" rel="noopener noreferrer"><span>Venmo $2 to join</span><span aria-hidden="true">→</span></a>
+      <div class="join-copy">
+        <span class="section-note">Enter by September 24</span>
+        <h2 id="join-title">How to Join</h2>
+        <p class="handle">Venmo Lilah · @Lilah-Gould</p>
+        <p class="small">
+          Send $2 and include the phone number or email where you’d like your
+          private StepUp invite. Make the payment private if it includes
+          contact information.
+        </p>
+      </div>
+      <a
+        class="button"
+        href="https://venmo.com/u/Lilah-Gould"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>Venmo $2 to join</span>
+        <span aria-hidden="true">→</span>
+      </a>
     </section>
-    <section class="card" aria-labelledby="before-title"><span class="section-note">Easy as one, two, three</span><h2 id="before-title">Before the Challenge</h2>
+    <section class="card" aria-labelledby="before-title">
+      <span class="section-note">Easy as one, two, three</span>
+      <h2 id="before-title">Before the Challenge</h2>
       <div class="steps">
-        <article class="step"><div><h3>Send your $2 entry</h3><p>Venmo <strong>@Lilah-Gould</strong>. Add the phone number or email where you want your invite. For example, <strong>(123) 456-7890</strong> or <strong>name@email.com</strong>.</p></div></article>
-        <article class="step"><div><h3>Join our StepUp group</h3><p>Open the private invite from Lilah and join <strong>“Boo Basket Step Challenge 🎃”</strong>.</p></div></article>
-        <article class="step"><div><h3>Check that your steps sync</h3><p>Test StepUp before September 25. You may see steps early, but <strong>none of them count</strong>. Official steps begin at 12:00 AM.</p></div></article>
+        <article class="step">
+          <div>
+            <h3>Send your $2 entry</h3>
+            <p>
+              Venmo <strong>@Lilah-Gould</strong>. Add the phone number or email
+              where you want your invite. For example,
+              <strong>(123) 456-7890</strong> or
+              <strong>name@email.com</strong>.
+            </p>
+          </div>
+        </article>
+        <article class="step">
+          <div>
+            <h3>Join our StepUp group</h3>
+            <p>
+              Open the private invite from Lilah and join
+              <strong>“Boo Basket Step Challenge 🎃”</strong> on StepUp.
+            </p>
+          </div>
+        </article>
+        <article class="step">
+          <div>
+            <h3>Check that your steps sync</h3>
+            <p>
+              Test StepUp before September 25. You may see steps early, but
+              <strong>none of them count</strong>. Official steps begin at
+              12:00 AM.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
-    <section class="card" aria-labelledby="dates-title"><span class="section-note">Save these dates</span><h2 id="dates-title">Challenge Timeline</h2>
+    <section class="card" aria-labelledby="dates-title">
+      <span class="section-note">Save these dates</span>
+      <h2 id="dates-title">Challenge Timeline</h2>
       <div class="dates">
-        <article class="date"><div class="date-icon">👟</div><div><span class="date-tag">Sept. 25 · 12:00 AM</span><h3>Start walking</h3><p>Walk, run, or simply move more. StepUp keeps track.</p></div></article>
-        <article class="date"><div class="date-icon">🍂</div><div><span class="date-tag">Oct. 25 · 11:59 PM</span><h3>Last steps count</h3><p>The highest official challenge total wins the Boo Basket.</p></div></article>
-        <article class="date"><div class="date-icon">🏆</div><div><span class="date-tag">October 26</span><h3>Winner announced</h3><p>One grand-prize winner, plus a runner-up if more than 15 people enter.</p></div></article>
+        <article class="date">
+          <div class="date-icon">👟</div>
+          <div>
+            <span class="date-tag">Sept. 25 · 12:00 AM</span>
+            <h3>Start walking</h3>
+            <p>Walk, run, or simply move more. StepUp keeps track.</p>
+          </div>
+        </article>
+        <article class="date">
+          <div class="date-icon">🍂</div>
+          <div>
+            <span class="date-tag">Oct. 25 · 11:59 PM</span>
+            <h3>Last steps count</h3>
+            <p>The highest official challenge total wins the Boo Basket.</p>
+          </div>
+        </article>
+        <article class="date">
+          <div class="date-icon">🏆</div>
+          <div>
+            <span class="date-tag">October 26</span>
+            <h3>Winner announced</h3>
+            <p>
+              One grand-prize winner, plus a runner-up if more than 15 people
+              enter.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
-    <section class="card" aria-labelledby="rules-title"><span class="section-note">A few rules</span><h2 id="rules-title">Good to Know</h2>
+    <section class="card" aria-labelledby="rules-title">
+      <span class="section-note">A few rules</span>
+      <h2 id="rules-title">Good to Know</h2>
       <div class="rules">
-        <article class="rule"><span class="rule-icon">📅</span><div><h3>Challenge window</h3><p>Sept. 25 at 12:00 AM through Oct. 25 at 11:59 PM.</p></div></article>
-        <article class="rule"><span class="rule-icon">🎭</span><div><h3>Mystery Mode</h3><p>Today’s totals stay hidden while ranks remain visible. Totals appear the next day.</p></div></article>
-        <article class="rule"><span class="rule-icon">🎟️</span><div><h3>Eligibility</h3><p>Pay the $2 entry fee by the deadline to be eligible to win.</p></div></article>
-        <article class="rule"><span class="rule-icon">🏆</span><div><h3>Official results</h3><p>The custom Sept. 25–Oct. 25 leaderboard determines the winner.</p></div></article>
-        <article class="rule"><span class="rule-icon">👟</span><div><h3>What counts</h3><p>Only steps recorded in StepUp during the official challenge window.</p></div></article>
-        <article class="rule"><span class="rule-icon">🚫</span><div><h3>No manual entries</h3><p>No manually added, edited, fabricated, or intentionally manipulated steps.</p></div></article>
-        <article class="rule"><span class="rule-icon">⌚</span><div><h3>Devices</h3><p>Phones and supported wearables are welcome when synced correctly.</p></div></article>
-        <article class="rule"><span class="rule-icon">✨</span><div><h3>Keep it fair</h3><p>It’s the honor system. Have fun, move more, it’s not that deep.</p></div></article>
+        <article class="rule">
+          <span class="rule-icon">📅</span>
+          <div>
+            <h3>Challenge window</h3>
+            <p>Sept. 25 at 12:00 AM through Oct. 25 at 11:59 PM.</p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">🎭</span>
+          <div>
+            <h3>Mystery Mode</h3>
+            <p>
+              Today’s totals stay hidden while ranks remain visible. Totals
+              appear the next day.
+            </p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">🎟️</span>
+          <div>
+            <h3>Eligibility</h3>
+            <p>Pay the $2 entry fee by the deadline to be eligible to win.</p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">🏆</span>
+          <div>
+            <h3>Official results</h3>
+            <p>
+              The custom Sept. 25–Oct. 25 leaderboard determines the winner.
+            </p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">👟</span>
+          <div>
+            <h3>What counts</h3>
+            <p>
+              Only steps recorded in StepUp during the official challenge
+              window.
+            </p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">🚫</span>
+          <div>
+            <h3>No manual entries</h3>
+            <p>
+              No manually added, edited, fabricated, or intentionally
+              manipulated steps.
+            </p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">⌚</span>
+          <div>
+            <h3>Devices</h3>
+            <p>
+              Phones and supported wearables are welcome when synced correctly.
+            </p>
+          </div>
+        </article>
+        <article class="rule">
+          <span class="rule-icon">✨</span>
+          <div>
+            <h3>Keep it fair</h3>
+            <p>
+              It’s the honor system. Have fun, move more, it’s not that deep.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
-    <section class="card" aria-labelledby="faq-title"><span class="section-note">A little more info</span><h2 id="faq-title">Questions & Answers</h2>
-      <details><summary>What is StepUp?</summary><p>It’s the app used for step tracking, leaderboard positions, and the group chat.</p></details>
-      <details><summary>How do I get the group link?</summary><p>After your $2 entry arrives, Lilah sends the private invite to the contact information in your Venmo description.</p></details>
-      <details><summary>Should my Venmo payment be private?</summary><p>Yes! Especially if its description includes your phone number or email.</p></details>
-      <details><summary>Do I need a smartwatch?</summary><p>No. Your phone works, or you can use a supported smartwatch or wearable.</p></details>
-      <details><summary>Can I run instead of walk?</summary><p>Yes. Walking, running, and normal daily movement count when StepUp records them.</p></details>
-      <details><summary>Can other people see my steps?</summary><p>Yes. Group members can see relevant activity and rankings. You can leave after the winner is announced.</p></details>
-      <details><summary>What if my steps stop syncing?</summary><p>Test before September 25. If syncing fails during the challenge, mention it in the group chat right away.</p></details>
-      <details><summary>What is in the Boo Basket?</summary> <p>The prize will be curated by Boo Basket professionals using the full entry pool. More people = better prizes! </p></details>
-      <details><summary>Who all can participate?</summary> <p>Anyone! Feel free to send this website to any friends and family. </p></details>
-  
+    <section class="card" aria-labelledby="faq-title">
+      <span class="section-note">A little more info</span>
+      <h2 id="faq-title">Questions & Answers</h2>
+      <details>
+        <summary>What is StepUp?</summary>
+        <p>
+          It’s the app used for step tracking, leaderboard positions, and the
+          group chat.
+        </p>
+      </details>
+      <details>
+        <summary>How do I get the group link?</summary>
+        <p>
+          After your $2 entry arrives, Lilah sends the private invite to the
+          contact information in your Venmo description.
+        </p>
+      </details>
+      <details>
+        <summary>Should my Venmo payment be private?</summary>
+        <p>
+          Yes! Especially if its description includes your phone number or
+          email.
+        </p>
+      </details>
+      <details>
+        <summary>Do I need a smartwatch?</summary>
+        <p>
+          No. Your phone works, or you can use a supported smartwatch or
+          wearable.
+        </p>
+      </details>
+      <details>
+        <summary>Can I run instead of walk?</summary>
+        <p>
+          Yes. Walking, running, and normal daily movement count when StepUp
+          records them.
+        </p>
+      </details>
+      <details>
+        <summary>Can other people see my steps?</summary>
+        <p>
+          Yes. Group members can see relevant activity and rankings. You can
+          leave after the winner is announced.
+        </p>
+      </details>
+      <details>
+        <summary>What if my steps stop syncing?</summary>
+        <p>
+          Test before September 25. If syncing fails during the challenge,
+          mention it in the group chat right away.
+        </p>
+      </details>
+      <details>
+        <summary>What is in the Boo Basket?</summary>
+        <p>
+          The prize will be curated by Boo Basket professionals using the full
+          entry pool. More people = better prizes!
+        </p>
+      </details>
+      <details>
+        <summary>Who all can participate?</summary>
+        <p>
+          Anyone! Feel free to send this website to any friends and family.
+        </p>
+      </details>
     </section>
-    <section class="card contact"><h2>Questions or Problems?</h2><p>Contact Lilah.</p><a href="mailto:lrbl.gould@gmail.com">lrbl.gould@gmail.com</a></section>
+    <section class="card contact">
+      <h2>Questions or Problems?</h2>
+      <p>Contact Lilah.</p>
+      <a href="mailto:lrbl.gould@gmail.com">lrbl.gould@gmail.com</a>
+    </section>
   </main>
-  <footer class="wrap">Boo Basket Step Challenge · 2026 </footer>
+  <footer class="wrap">
+    Boo Basket Step Challenge · 2026
+  </footer>
   <script>
-    const PARTICIPANT_COUNT=2; // Update this number as people join.
-    const ENTRY_FEE=2;
-    document.getElementById("participant-count").textContent=PARTICIPANT_COUNT;
-    document.getElementById("prize-value").textContent=PARTICIPANT_COUNT*ENTRY_FEE;
-    function updateCountdown(){
-      const banner=document.getElementById("page-status"),text=document.getElementById("countdown-text"),now=new Date();
-      const close=new Date("2026-09-24T00:00:00-04:00"),start=new Date("2026-09-25T00:00:00-04:00"),end=new Date("2026-10-25T23:59:59-04:00");
-      const left=(target,suffix)=>{const diff=target-now,hours=Math.floor(diff/36e5);if(hours<24)return `${Math.max(1,hours)} ${hours===1?"hour":"hours"} ${suffix}`;const days=Math.floor(diff/864e5);return `${days} ${days===1?"day":"days"} ${suffix}`};
-      banner.className="status";
-      if(now<close)text.textContent=left(close,"until entries close!");
-      else if(now<start)text.textContent=left(start,"until the challenge begins!");
-      else if(now<=end){text.textContent=left(end,"left to get your steps in!");banner.classList.add("live")}
-      else{text.textContent="The challenge is complete!";banner.classList.add("complete")}
+    const PARTICIPANT_COUNT = 2; // Update this number as people join.
+    const ENTRY_FEE = 2;
+    document.getElementById("participant-count").textContent = PARTICIPANT_COUNT;
+    document.getElementById("prize-value").textContent =
+      PARTICIPANT_COUNT * ENTRY_FEE;
+    function updateCountdown() {
+      const banner = document.getElementById("page-status");
+      const text = document.getElementById("countdown-text");
+      const now = new Date();
+      const close = new Date("2026-09-24T00:00:00-04:00");
+      const start = new Date("2026-09-25T00:00:00-04:00");
+      const end = new Date("2026-10-25T23:59:59-04:00");
+      const left = (target, suffix) => {
+        const diff = target - now;
+        const hours = Math.floor(diff / 36e5);
+        if (hours < 24) {
+          return `${Math.max(1, hours)} ${
+            hours === 1 ? "hour" : "hours"
+          } ${suffix}`;
+        }
+        const days = Math.floor(diff / 864e5);
+        return `${days} ${days === 1 ? "day" : "days"} ${suffix}`;
+      };
+      banner.className = "status";
+      if (now < close) {
+        text.textContent = left(close, "until entries close!");
+      } else if (now < start) {
+        text.textContent = left(start, "until the challenge begins!");
+      } else if (now <= end) {
+        text.textContent = left(end, "left to get your steps in!");
+        banner.classList.add("live");
+      } else {
+        text.textContent = "The challenge is complete!";
+        banner.classList.add("complete");
+      }
     }
-    updateCountdown();setInterval(updateCountdown,60000);
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
   </script>
 </body>
 </html>
