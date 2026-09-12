@@ -361,6 +361,47 @@
 
     .stats {
       display: grid;
+      gap: 11px;
+    }
+
+    .prize-stat {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      padding: 22px 18px 20px;
+      border: 1px solid #e5cfb0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff5df, #f9e2cf);
+      box-shadow: 0 10px 24px rgba(91,55,28,.10);
+      text-align: center;
+    }
+
+    .prize-stat::after {
+      content: "🎃";
+      position: absolute;
+      right: 12px;
+      bottom: -14px;
+      font-size: 4.5rem;
+      opacity: .08;
+      transform: rotate(10deg);
+    }
+
+    .prize-stat .stat-title {
+      color: var(--caramel);
+    }
+
+    .prize-stat .stat-value {
+      margin: 10px 0 6px;
+      font-size: clamp(3.2rem, 15vw, 4.25rem);
+    }
+
+    .prize-stat .stat-label {
+      min-height: 0;
+      font-size: .76rem;
+    }
+
+    .participant-stats {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 11px;
     }
@@ -369,21 +410,22 @@
       position: relative;
       overflow: hidden;
       min-width: 0;
-      min-height: 138px;
-      padding: 20px 11px 17px;
+      min-height: 118px;
+      padding: 17px 10px 14px;
       border: 1px solid #e5cfb0;
       border-radius: 18px;
       background: var(--paper);
-      box-shadow: 0 9px 22px rgba(91,55,28,.09);
+      box-shadow: 0 8px 20px rgba(91,55,28,.08);
       text-align: center;
     }
 
-    .stat:first-child {
+    .stat.total {
       background: #fff8e8;
     }
 
-    .stat:last-child {
-      background: #fbeddf;
+    .stat.paid {
+      background: #eef1e4;
+      border-color: #d5dcc4;
     }
 
     .stat::after {
@@ -394,28 +436,34 @@
       width: 75px;
       height: 75px;
       border-radius: 50%;
-      background: rgba(232,173,53,.13);
+      background: rgba(232,173,53,.11);
     }
 
-    .stat:last-child::after {
-      background: rgba(221,107,40,.12);
+    .stat.paid::after {
+      background: rgba(120,130,102,.12);
     }
 
     .stat-title {
       color: var(--brown);
-      font-size: .75rem;
+      font-size: .72rem;
       font-weight: 700;
       line-height: 1.2;
-      letter-spacing: .12em;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
     .stat-value {
-      margin: 10px 0 7px;
+      position: relative;
+      z-index: 1;
+      margin: 9px 0 6px;
       color: var(--orange);
       font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(2.55rem, 12vw, 3.2rem);
+      font-size: clamp(2.3rem, 11vw, 3rem);
       line-height: .9;
+    }
+
+    .stat.paid .stat-value {
+      color: var(--sage);
     }
 
     .stat-label {
@@ -423,7 +471,7 @@
       z-index: 1;
       min-height: 2.2em;
       color: var(--muted);
-      font-size: .7rem;
+      font-size: .68rem;
       font-weight: 600;
       line-height: 1.25;
     }
@@ -494,6 +542,87 @@
 
     .button:active {
       transform: scale(.985);
+    }
+
+
+    /* Paid vs free entry options */
+
+    .join-options {
+      display: grid;
+      gap: 12px;
+      padding: 0 20px 20px;
+    }
+
+    .join-option {
+      padding: 17px 15px;
+      border: 1px solid #e5cfb0;
+      border-radius: 16px;
+      background: #fff8e8;
+    }
+
+    .join-option.free {
+      background: #eef1e4;
+      border-color: #d5dcc4;
+    }
+
+    .join-option-label {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: var(--caramel);
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .join-option.free .join-option-label {
+      color: #667151;
+    }
+
+    .join-option h3 {
+      margin-bottom: 5px;
+      font-size: 1.05rem;
+    }
+
+    .join-option p {
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.45;
+    }
+
+    .join-option-actions {
+      display: grid;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .option-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 49px;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg,#dd6b28,#c9541e);
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .option-button.stepup {
+      background: linear-gradient(135deg,#788266,#657052);
+    }
+
+    .option-button:active {
+      transform: scale(.985);
+    }
+
+    @media (min-width: 720px) {
+      .join-options {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     /* Before challenge */
@@ -820,11 +949,15 @@
       }
 
       .stats {
-        gap: 16px;
+        gap: 14px;
+      }
+
+      .participant-stats {
+        gap: 14px;
       }
 
       .stat {
-        min-height: 150px;
+        min-height: 130px;
       }
 
       .dates {
@@ -891,99 +1024,149 @@
 
     <p class="intro">
       Walk the most steps from
-      <strong>September 20 through October 20</strong>
-      and win a Boo Basket funded by everyone’s entry fees.
+      <strong>September 20 through October 20</strong>.
+      Join for free for fun and bragging rights, or enter with $2 to be eligible to win a Boo Basket.
     </p>
 
-    <div class="stepup-download">
-      <p class="download-label">Don’t have StepUp yet?</p>
-      <p class="download-subtext">
-        Download the app before joining the challenge.
-      </p>
-
-      <div class="app-downloads" aria-label="Download the StepUp app">
-
-        <a
-          class="app-button"
-          href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Download StepUp on the Apple App Store"
-        >
-          <span class="app-icon" aria-hidden="true"></span>
-          <span>
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </span>
-        </a>
-
-        <a
-          class="app-button"
-          href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Get StepUp on Google Play"
-        >
-          <span class="app-icon" aria-hidden="true">▶</span>
-          <span>
-            <small>Get it on</small>
-            <strong>Google Play</strong>
-          </span>
-        </a>
-
-      </div>
-    </div>
+    
 
   </header>
 
   <main class="wrap">
 
-    <!-- Update PARTICIPANT_COUNT near the bottom. Prize = participants × $2. -->
+    <!-- Update TOTAL_PARTICIPANT_COUNT and PAID_PARTICIPANT_COUNT near the bottom. -->
     <section class="stats" aria-label="Current challenge totals">
 
-      <div class="stat">
-        <div class="stat-title">Participants</div>
-        <div class="stat-value" id="participant-count">0</div>
-        <div class="stat-label">and counting</div>
+      <div class="prize-stat">
+        <div class="stat-title">Current Boo Basket Fund</div>
+        <div class="stat-value">$<span id="prize-value">0</span></div>
+        <div class="stat-label">
+          Built from $2 prize entries
+        </div>
       </div>
 
-      <div class="stat">
-        <div class="stat-title">Prize Fund</div>
-        <div class="stat-value">$<span id="prize-value">0</span></div>
-        <div class="stat-label">More players = better prizes!</div>
+      <div class="participant-stats">
+
+        <div class="stat total">
+          <div class="stat-title">Total Participants</div>
+          <div class="stat-value" id="participant-count">0</div>
+          <div class="stat-label">
+            Everyone in the challenge
+          </div>
+        </div>
+
+        <div class="stat paid">
+          <div class="stat-title">Paid Participants</div>
+          <div class="stat-value" id="paid-participant-count">0</div>
+          <div class="stat-label">
+            Eligible to win the Boo Basket
+          </div>
+        </div>
+
       </div>
 
     </section>
-
     <section class="card join" aria-labelledby="join-title">
 
       <div class="join-copy">
-        <span class="section-note">Enter by September 19 11:59PM </span>
-
-        <h2 id="join-title">How to Join</h2>
-
-        <p class="handle">
-          Venmo Lilah · @Lilah-Gould
-        </p>
-
+        <span class="section-note">Enter by September 19 · 11:59 PM</span>
+        <h2 id="join-title">Choose How to Join</h2>
         <p class="small">
-          Send $2 and include the phone number or email where you’d like your
-          private StepUp invite. Make the payment private if it includes
-          contact information.
+          Everyone can participate in the StepUp challenge. Paying the $2 entry fee
+          simply makes you eligible to win the Boo Basket.
         </p>
       </div>
 
-      <a
-        class="button"
-        href="https://venmo.com/u/Lilah-Gould"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>Venmo $2 to join</span>
-        <span aria-hidden="true">→</span>
-      </a>
+      <div class="join-options">
+
+        <div class="join-option">
+          <span class="join-option-label">Prize Entry · $2</span>
+          <h3>Play for the Boo Basket</h3>
+          <p>
+            Venmo <strong>@Lilah-Gould</strong> $2 by the deadline.
+            Paid participants are eligible to win the Boo Basket.
+          </p>
+          <div class="join-option-actions">
+            <a
+              class="option-button"
+              href="https://venmo.com/u/Lilah-Gould"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Venmo $2 to enter →
+            </a>
+            <a
+              class="option-button stepup"
+              href="https://join.thestepupapp.com/s6ZhLI"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join the StepUp group →
+            </a>
+          </div>
+        </div>
+
+        <div class="join-option free">
+          <span class="join-option-label">Free Entry · $0</span>
+          <h3>Join for fun</h3>
+          <p>
+            Skip the entry fee and join the same challenge for fun, motivation,
+            and bragging rights. Free participants are not eligible to win the Boo Basket.
+          </p>
+          <div class="join-option-actions">
+            <a
+              class="option-button stepup"
+              href="https://join.thestepupapp.com/s6ZhLI"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join StepUp for free →
+            </a>
+          </div>
+        </div>
+
+      </div>
 
     </section>
+
+    <div class="stepup-download">
+        <p class="download-label">Don’t have StepUp yet?</p>
+        <p class="download-subtext">
+          Download the app before joining the challenge.
+        </p>
+  
+        <div class="app-downloads" aria-label="Download the StepUp app">
+  
+          <a
+            class="app-button"
+            href="https://apps.apple.com/us/app/stepup-pedometer-step-counter/id979101825"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download StepUp on the Apple App Store"
+          >
+            <span class="app-icon" aria-hidden="true"></span>
+            <span>
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </span>
+          </a>
+  
+          <a
+            class="app-button"
+            href="https://play.google.com/store/apps/details?id=com.thestepupapp.stepup"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Get StepUp on Google Play"
+          >
+            <span class="app-icon" aria-hidden="true">▶</span>
+            <span>
+              <small>Get it on</small>
+              <strong>Google Play</strong>
+            </span>
+          </a>
+  
+        </div>
+      </div>
 
     <section class="card" aria-labelledby="before-title">
 
@@ -994,40 +1177,38 @@
 
         <article class="step">
           <div>
-            <h3>Send your $2 entry</h3>
+            <h3>Choose paid or free entry</h3>
             <p>
-              Venmo <strong>@Lilah-Gould</strong>. Add the phone number or email
-              where you want your invite. For example,
-              <strong>(123) 456-7890</strong> or
-              <strong>name@email.com</strong>.
+              Pay <strong>$2</strong> if you want to be eligible to win the Boo Basket,
+              or join <strong>for free</strong> if you’re just here for fun and bragging rights.
             </p>
           </div>
         </article>
 
         <article class="step">
           <div>
-            <h3>Join our StepUp group</h3>
+            <h3>Join “Boo Basket Step Challenge 🎃” on StepUp</h3>
             <p>
-              Open the private invite from Lilah and join
-              <strong>“Boo Basket Step Challenge 🎃”</strong>
-              on StepUp.
+              Tap the StepUp button above.
+              </a>.
             </p>
           </div>
         </article>
 
         <article class="step">
           <div>
-            <h3>Check that your steps sync</h3>
+            <h3>Make sure your steps sync</h3>
             <p>
               Test StepUp before September 20. You may see steps early, but
-              <strong>none of them count</strong>. Official steps begin at
-              12:00 AM.
+              <strong>none of them count</strong>. Official challenge steps begin
+              September 20 at 12:00 AM.
             </p>
           </div>
         </article>
 
       </div>
     </section>
+
 
     <section class="card" aria-labelledby="dates-title">
 
@@ -1067,7 +1248,7 @@
             <span class="date-tag">October 21</span>
             <h3>Winner announced</h3>
             <p>
-              One grand-prize winner, plus a runner-up if more than 15 people enter.
+              One grand-prize winner, plus a runner-up if we have more than 15 paid participants.
             </p>
           </div>
         </article>
@@ -1108,7 +1289,7 @@
           <div>
             <h3>Eligibility</h3>
             <p>
-              Pay the $2 entry fee by the deadline to be eligible to win.
+              Everyone can participate, but only people who pay the $2 entry fee by the deadline are eligible to win the Boo Basket.
             </p>
           </div>
         </article>
@@ -1179,17 +1360,18 @@
       </details>
 
       <details>
-        <summary>How do I get the group link?</summary>
+        <summary>Can I join without paying $2?</summary>
         <p>
-          After your $2 entry arrives, Lilah sends the private invite to the
-          contact information in your Venmo description.
+          Yes! Free participants can join the StepUp group, track their steps,
+          and compete for fun and bragging rights. Only paid participants are eligible
+          to win the Boo Basket.
         </p>
       </details>
 
       <details>
-        <summary>Should my Venmo payment be private?</summary>
+        <summary>Where is the StepUp group link?</summary>
         <p>
-          Yes! Especially if its description includes your phone number or email.
+          Use the “Join StepUp” button in the How to Join section. 
         </p>
       </details>
 
@@ -1253,14 +1435,19 @@
   </footer>
 
   <script>
-    const PARTICIPANT_COUNT = 4; // Update this number as people join.
+    // UPDATE COUNTS HERE 
+    const TOTAL_PARTICIPANT_COUNT = 6;  // Everyone in the StepUp challenge.
+    const PAID_PARTICIPANT_COUNT = 4;  // People who paid the $2 prize entry.
     const ENTRY_FEE = 2;
 
     document.getElementById("participant-count").textContent =
-      PARTICIPANT_COUNT;
+      TOTAL_PARTICIPANT_COUNT;
+
+    document.getElementById("paid-participant-count").textContent =
+      PAID_PARTICIPANT_COUNT;
 
     document.getElementById("prize-value").textContent =
-      PARTICIPANT_COUNT * ENTRY_FEE;
+      PAID_PARTICIPANT_COUNT * ENTRY_FEE;
 
     function updateCountdown() {
       const banner = document.getElementById("page-status");
