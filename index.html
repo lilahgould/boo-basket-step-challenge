@@ -400,6 +400,40 @@
       font-size: .76rem;
     }
 
+    .participant-list-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 40px;
+
+  margin-top: 10px;
+  padding: 8px 14px;
+
+  border: 1px solid #d5dcc4;
+  border-radius: 12px;
+
+  color: var(--brown);
+  background: #eef1e4;
+
+  font-size: .78rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+
+  box-shadow: 0 4px 10px rgba(91, 55, 28, 0.06);
+}
+
+.participant-list-button:hover {
+  background: #e4e9d6;
+  transform: translateY(-1px);
+}
+
+.participant-list-button:active {
+  transform: scale(.985);
+}
+
     .participant-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1048,12 +1082,18 @@
       <div class="participant-stats">
 
         <div class="stat total">
-          <div class="stat-title">Total Participants</div>
-          <div class="stat-value" id="participant-count">0</div>
-          <div class="stat-label">
-            Everyone in the challenge
+            <div class="stat-title">Total Participants</div>
+            <div
+              class="stat-value"
+              id="participant-count"
+            >
+              0
+            </div>
+            <div class="stat-label">
+              Everyone in the challenge
+            </div>
+
           </div>
-        </div>
 
         <div class="stat paid">
           <div class="stat-title">Paid Participants</div>
@@ -1064,6 +1104,13 @@
         </div>
 
       </div>
+
+      <a
+      class="participant-list-button"
+      href="https://lilahgould.github.io/boo-basket-step-challenge/participants"
+    >
+      View Participant List →
+    </a>
 
     </section>
     <section class="card join" aria-labelledby="join-title">
