@@ -1434,20 +1434,33 @@
     Boo Basket Step Challenge · 2026
   </footer>
 
-  <script>
-    // UPDATE COUNTS HERE 
-    const TOTAL_PARTICIPANT_COUNT = 18;  // Everyone in the StepUp challenge.
-    const PAID_PARTICIPANT_COUNT = 15;  // People who paid the $2 prize entry.
-    const ENTRY_FEE = 2;
+  <script>    
+  const STATS_URL = "https://script.google.com/macros/s/AKfycbx14iDiw-Kv39LmtBysCxzETltAWW_aMMNT94M1nyN4E6VPOi_oHrUsqQ6JXBovuTQU8g/exec";
 
-    document.getElementById("participant-count").textContent =
-      TOTAL_PARTICIPANT_COUNT;
+  async function loadChallengeStats() {
+    try {
+      const response = await fetch(STATS_URL);
 
-    document.getElementById("paid-participant-count").textContent =
-      PAID_PARTICIPANT_COUNT;
+      if (!response.ok) {
+        throw new Error("Unable to load challenge stats");
+      }
 
-    document.getElementById("prize-value").textContent =
-      PAID_PARTICIPANT_COUNT * ENTRY_FEE;
+      const stats = await response.json();
+
+      document.getElementById("participant-count").textContent =
+        stats.totalParticipants;
+
+      document.getElementById("paid-participant-count").textContent =
+        stats.paidParticipants;
+
+      document.getElementById("prize-value").textContent =
+        stats.prizeFund;
+    } catch (error) {
+      console.error("Challenge stats failed to load:", error);
+    }
+  }
+
+  loadChallengeStats();
 
     function updateCountdown() {
       const banner = document.getElementById("page-status");
