@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#fbf4e7">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Boo Basket Participant Tracker</title>
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
+
+  <title>Boo Basket Participants</title>
 
   <style>
     :root {
@@ -14,36 +16,19 @@
       --brown: #513422;
       --orange: #dd6b28;
       --sage: #788266;
-      --ink: #403126;
       --muted: #7b6a5d;
       --line: #ead8c3;
-      --green-soft: #eef1e4;
-      --peach-soft: #fbeddf;
-      --shadow: 0 10px 26px rgba(91,55,28,.09);
     }
 
-    *,
-    *::before,
-    *::after {
+    * {
       box-sizing: border-box;
     }
 
-    html,
     body {
-      width: 100%;
-      max-width: 100%;
       margin: 0;
-      overflow-x: hidden;
-    }
+      padding: 24px 14px 40px;
 
-    body {
-      min-height: 100vh;
-      padding:
-        calc(18px + env(safe-area-inset-top))
-        14px
-        calc(32px + env(safe-area-inset-bottom));
-
-      color: var(--ink);
+      color: var(--brown);
 
       background:
         radial-gradient(
@@ -51,11 +36,7 @@
           rgba(232,173,53,.18),
           transparent 18rem
         ),
-        linear-gradient(
-          180deg,
-          var(--cream),
-          #f8eddf
-        );
+        var(--cream);
 
       font-family:
         -apple-system,
@@ -66,145 +47,57 @@
 
     .wrap {
       width: 100%;
-      max-width: 780px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
     header {
-      margin-bottom: 16px;
-    }
-
-    .eyebrow {
-      margin: 0 0 4px;
-
-      color: var(--orange);
-
-      font-size: .72rem;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     h1 {
       margin: 0;
 
-      color: var(--brown);
-
-      font-size: clamp(2rem, 8vw, 3rem);
-      line-height: 1;
+      font-size: clamp(2rem, 9vw, 3rem);
     }
 
     .subtitle {
-      margin: 9px 0 0;
+      margin: 8px 0 0;
 
       color: var(--muted);
-
-      font-size: .9rem;
-      line-height: 1.45;
     }
 
-    .privacy-note {
-      margin-top: 12px;
-      padding: 10px 12px;
-
-      border: 1px solid #e4d2ba;
-      border-radius: 12px;
-
-      color: var(--muted);
-      background: rgba(255,250,242,.72);
-
-      font-size: .78rem;
-      line-height: 1.4;
-    }
-
-    .summary {
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
 
-      margin: 16px 0;
+      gap: 8px;
+      margin: 20px 0;
     }
 
-    .summary-card {
-      min-width: 0;
-      padding: 13px 8px;
+    .stat {
+      padding: 14px 8px;
 
       border: 1px solid var(--line);
       border-radius: 14px;
 
       background: var(--paper);
-      box-shadow: var(--shadow);
 
       text-align: center;
     }
 
-    .summary-card:nth-child(2) {
-      background: var(--green-soft);
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
     }
 
-    .summary-card:nth-child(3) {
-      background: var(--peach-soft);
-    }
+    .stat-label {
+      margin-top: 3px;
 
-    .summary-label {
       color: var(--muted);
 
-      font-size: .64rem;
-      font-weight: 750;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .summary-value {
-      margin-top: 4px;
-
-      color: var(--brown);
-
-      font-size: 1.7rem;
-      font-weight: 850;
-      line-height: 1;
-    }
-
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-
-      margin-bottom: 14px;
-    }
-
-    button {
-      min-height: 46px;
-      padding: 9px 12px;
-
-      border: 0;
-      border-radius: 12px;
-
-      font: inherit;
-      font-size: .86rem;
-      font-weight: 750;
-
-      cursor: pointer;
-    }
-
-    .primary {
-      color: #fff;
-      background: var(--orange);
-    }
-
-    .secondary {
-      color: #fff;
-      background: var(--sage);
-    }
-
-    .ghost {
-      color: var(--brown);
-      background: #f1e4d4;
-    }
-
-    .danger {
-      color: #8b3b29;
-      background: #fae4dd;
+      font-size: .68rem;
     }
 
     .participant-list {
@@ -213,184 +106,67 @@
     }
 
     .participant {
-      padding: 14px;
+      padding: 15px;
 
       border: 1px solid var(--line);
       border-radius: 16px;
 
-      background: rgba(255,250,242,.96);
-      box-shadow: var(--shadow);
-    }
-
-    .participant-top {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-
-      align-items: center;
-    }
-
-    .participant-name,
-    .notes {
-      width: 100%;
-
-      border: 1px solid #dec8ae;
-      border-radius: 10px;
-      outline: none;
-
-      color: var(--ink);
-      background: #fffdf8;
-
-      font: inherit;
+      background: rgba(255,250,242,.95);
     }
 
     .participant-name {
-      min-width: 0;
-      padding: 10px 11px;
-
-      font-weight: 700;
-    }
-
-    .notes {
-      min-height: 68px;
-      margin-top: 10px;
-      padding: 10px 11px;
-
-      resize: vertical;
-
-      font-size: .86rem;
-      line-height: 1.4;
-    }
-
-    .participant-name:focus,
-    .notes:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(221,107,40,.10);
-    }
-
-    .checks {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-
-      margin-top: 10px;
-    }
-
-    .check {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      min-width: 0;
-      padding: 9px 10px;
-
-      border-radius: 10px;
-
-      background: #f7edde;
-      color: var(--brown);
-
-      font-size: .8rem;
-      font-weight: 700;
-    }
-
-    .check.stepup {
-      background: var(--green-soft);
-    }
-
-    input[type="checkbox"] {
-      width: 19px;
-      height: 19px;
-      margin: 0;
-
-      accent-color: var(--sage);
-
-      flex: 0 0 auto;
-    }
-
-    .remove {
-      width: 34px;
-      min-height: 34px;
-      padding: 0;
-
-      border-radius: 10px;
-
-      color: #9b4a36;
-      background: #fae6df;
+      margin-bottom: 10px;
 
       font-size: 1rem;
+      font-weight: 800;
     }
 
-    .publish-card {
-      margin-top: 16px;
-      padding: 16px;
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
 
-      border: 1px solid #d5dcc4;
-      border-radius: 16px;
-
-      background: var(--green-soft);
+      gap: 7px;
     }
 
-    .publish-card h2 {
-      margin: 0 0 5px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
 
-      color: var(--brown);
+      padding: 6px 9px;
 
-      font-size: 1.05rem;
+      border-radius: 999px;
+
+      font-size: .75rem;
+      font-weight: 700;
     }
 
-    .publish-card p {
-      margin: 0 0 12px;
+    .eligible {
+      color: #78411f;
+      background: #f8e1cd;
+    }
+
+    .free {
+      color: #5d5b4a;
+      background: #eee9dd;
+    }
+
+    .stepup {
+      color: #4f5a3f;
+      background: #e5ead8;
+    }
+
+    .waiting {
+      color: #7b6753;
+      background: #f4eadc;
+    }
+
+    .loading,
+    .error {
+      padding: 24px;
 
       color: var(--muted);
 
-      font-size: .82rem;
-      line-height: 1.45;
-    }
-
-    .publish-card button {
-      width: 100%;
-    }
-
-    .helper {
-      margin-top: 8px !important;
-      font-size: .72rem !important;
-    }
-
-    @media (max-width: 390px) {
-      .summary {
-        gap: 6px;
-      }
-
-      .summary-card {
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-
-      .summary-label {
-        font-size: .57rem;
-      }
-
-      .summary-value {
-        font-size: 1.45rem;
-      }
-
-      .actions {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (min-width: 700px) {
-      body {
-        padding-top: 30px;
-      }
-
-      .participant {
-        padding: 16px;
-      }
-
-      .checks {
-        max-width: 360px;
-      }
+      text-align: center;
     }
   </style>
 </head>
@@ -399,428 +175,171 @@
   <main class="wrap">
 
     <header>
-      <p class="eyebrow">Host Dashboard</p>
-
-      <h1>Participant Tracker 🎃</h1>
+      <h1>Challenge Participants 🎃</h1>
 
       <p class="subtitle">
-        Track who joined, who paid for prize eligibility,
-        who made it into the StepUp group, and any notes.
+        See who's in the Boo Basket Step Challenge.
       </p>
-
-      <div class="privacy-note">
-        This tracker saves participant details only in this browser
-        using local storage. The website stats export contains totals
-        only — no names or notes.
-      </div>
     </header>
 
-    <section class="summary" aria-label="Challenge summary">
+    <section class="stats">
 
-      <div class="summary-card">
-        <div class="summary-label">Total</div>
-        <div class="summary-value" id="total-count">0</div>
+      <div class="stat">
+        <div
+          class="stat-value"
+          id="total-count"
+        >
+          —
+        </div>
+
+        <div class="stat-label">
+          Participants
+        </div>
       </div>
 
-      <div class="summary-card">
-        <div class="summary-label">Paid</div>
-        <div class="summary-value" id="paid-count">0</div>
+      <div class="stat">
+        <div
+          class="stat-value"
+          id="paid-count"
+        >
+          —
+        </div>
+
+        <div class="stat-label">
+          Prize Eligible
+        </div>
       </div>
 
-      <div class="summary-card">
-        <div class="summary-label">Prize Fund</div>
-        <div class="summary-value">
-          $<span id="prize-count">0</span>
+      <div class="stat">
+        <div class="stat-value">
+          $<span id="prize-fund">—</span>
+        </div>
+
+        <div class="stat-label">
+          Boo Basket Fund
         </div>
       </div>
 
     </section>
 
-    <div class="actions">
-
-      <button
-        class="primary"
-        id="add-participant"
-        type="button"
-      >
-        + Add participant
-      </button>
-
-      <button
-        class="ghost"
-        id="export-backup"
-        type="button"
-      >
-        Download backup
-      </button>
-
-    </div>
-
     <section
-      class="participant-list"
       id="participant-list"
-      aria-label="Participants"
-    ></section>
-
-    <section class="publish-card">
-
-      <h2>Update the public website</h2>
-
-      <p>
-        When your list changes, download a fresh
-        <strong>challenge-stats.js</strong>
-        and replace that one file in your GitHub Pages repo.
-
-        The homepage will then update its total participants,
-        paid participants, and prize fund automatically.
-      </p>
-
-      <button
-        class="secondary"
-        id="export-stats"
-        type="button"
-      >
-        Download updated challenge-stats.js
-      </button>
-
-      <p class="helper">
-        Participant names, StepUp status, and notes are never
-        included in the public stats file.
-      </p>
-
+      class="participant-list"
+    >
+      <div class="loading">
+        Loading participants…
+      </div>
     </section>
 
   </main>
 
   <script>
-    const STORAGE_KEY = "booBasketParticipantTrackerV1";
-    const ENTRY_FEE = 2;
+    const STATS_URL = "https://script.google.com/macros/s/AKfycbx14iDiw-Kv39LmtBysCxzETltAWW_aMMNT94M1nyN4E6VPOi_oHrUsqQ6JXBovuTQU8g/exec";
 
-    const makeId = () =>
-      crypto.randomUUID
-        ? crypto.randomUUID()
-        : `${Date.now()}-${Math.random()}`;
+    async function loadParticipants() {
+      const list = document.getElementById("participant-list");
 
-    const defaultParticipants = Array.from(
-      { length: 4 },
-      () => ({
-        id: makeId(),
-        name: "",
-        paid: true,
-        inStepUp: false,
-        notes: ""
-      })
-    );
-
-    let participants = loadParticipants();
-
-    function loadParticipants() {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const response = await fetch(STATS_URL);
 
-        return saved
-          ? JSON.parse(saved)
-          : defaultParticipants;
-      } catch {
-        return defaultParticipants;
+        if (!response.ok) {
+          throw new Error("Unable to load participant data");
+        }
+
+        const data = await response.json();
+
+        document.getElementById(
+          "total-count"
+        ).textContent =
+          data.totalParticipants;
+
+        document.getElementById(
+          "paid-count"
+        ).textContent =
+          data.paidParticipants;
+
+        document.getElementById(
+          "prize-fund"
+        ).textContent =
+          data.prizeFund;
+
+        list.innerHTML = "";
+
+        data.participants.forEach(
+          participant => {
+
+            const card =
+              document.createElement(
+                "article"
+              );
+
+            card.className =
+              "participant";
+
+            const eligibility =
+              participant.eligible
+                ? `
+                  <span class="badge eligible">
+                    🎃 Boo Basket Eligible
+                  </span>
+                `
+                : `
+                  <span class="badge free">
+                    NOT ELIGIBLE TO WIN
+                  </span>
+                `;
+
+            const stepUp =
+              participant.inStepUp
+                ? `
+                  <span class="badge stepup">
+                    ✓ In StepUp
+                  </span>
+                `
+                : `
+                  <span class="badge waiting">
+                    Waiting to Join StepUp
+                  </span>
+                `;
+
+            card.innerHTML = `
+              <div class="participant-name">
+                ${escapeHtml(
+                  participant.name
+                )}
+              </div>
+
+              <div class="badges">
+                ${eligibility}
+                ${stepUp}
+              </div>
+            `;
+
+            list.appendChild(card);
+          }
+        );
+
+      } catch (error) {
+        console.error(error);
+
+        list.innerHTML = `
+          <div class="error">
+            Unable to load participants
+            right now.
+          </div>
+        `;
       }
     }
 
-    function saveParticipants() {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(participants)
-      );
-
-      updateSummary();
-    }
-
-    function updateSummary() {
-      const total = participants.length;
-
-      const paid =
-        participants.filter(
-          participant => participant.paid
-        ).length;
-
-      document.getElementById(
-        "total-count"
-      ).textContent = total;
-
-      document.getElementById(
-        "paid-count"
-      ).textContent = paid;
-
-      document.getElementById(
-        "prize-count"
-      ).textContent = paid * ENTRY_FEE;
-    }
-
     function escapeHtml(value) {
-      return String(value ?? "")
+      return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;");
     }
 
-    function render() {
-      const list =
-        document.getElementById("participant-list");
-
-      list.innerHTML = "";
-
-      participants.forEach(
-        (participant, index) => {
-          const card =
-            document.createElement("article");
-
-          card.className = "participant";
-
-          card.innerHTML = `
-            <div class="participant-top">
-
-              <input
-                class="participant-name"
-                type="text"
-                value="${escapeHtml(participant.name)}"
-                placeholder="Participant ${index + 1} name"
-                aria-label="Participant ${index + 1} name"
-              >
-
-              <button
-                class="remove"
-                type="button"
-                aria-label="Remove participant"
-              >
-                ×
-              </button>
-
-            </div>
-
-            <div class="checks">
-
-              <label class="check">
-                <input
-                  class="paid-check"
-                  type="checkbox"
-                  ${participant.paid ? "checked" : ""}
-                >
-                Paid $2
-              </label>
-
-              <label class="check stepup">
-                <input
-                  class="stepup-check"
-                  type="checkbox"
-                  ${participant.inStepUp ? "checked" : ""}
-                >
-                In StepUp
-              </label>
-
-            </div>
-
-            <textarea
-              class="notes"
-              placeholder="Notes (optional)"
-              aria-label="Notes for participant ${index + 1}"
-            >${escapeHtml(participant.notes)}</textarea>
-          `;
-
-          card
-            .querySelector(".participant-name")
-            .addEventListener(
-              "input",
-              event => {
-                participant.name =
-                  event.target.value;
-
-                saveParticipants();
-              }
-            );
-
-          card
-            .querySelector(".paid-check")
-            .addEventListener(
-              "change",
-              event => {
-                participant.paid =
-                  event.target.checked;
-
-                saveParticipants();
-              }
-            );
-
-          card
-            .querySelector(".stepup-check")
-            .addEventListener(
-              "change",
-              event => {
-                participant.inStepUp =
-                  event.target.checked;
-
-                saveParticipants();
-              }
-            );
-
-          card
-            .querySelector(".notes")
-            .addEventListener(
-              "input",
-              event => {
-                participant.notes =
-                  event.target.value;
-
-                saveParticipants();
-              }
-            );
-
-          card
-            .querySelector(".remove")
-            .addEventListener(
-              "click",
-              () => {
-                const displayName =
-                  participant.name.trim() ||
-                  `Participant ${index + 1}`;
-
-                if (
-                  !confirm(
-                    `Remove ${displayName}?`
-                  )
-                ) {
-                  return;
-                }
-
-                participants =
-                  participants.filter(
-                    item =>
-                      item.id !== participant.id
-                  );
-
-                saveParticipants();
-                render();
-              }
-            );
-
-          list.appendChild(card);
-        }
-      );
-
-      updateSummary();
-    }
-
-    function downloadFile(
-      filename,
-      content,
-      type = "text/plain"
-    ) {
-      const blob =
-        new Blob(
-          [content],
-          { type }
-        );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-      link.download = filename;
-
-      document.body.appendChild(link);
-
-      link.click();
-      link.remove();
-
-      URL.revokeObjectURL(url);
-    }
-
-    document
-      .getElementById("add-participant")
-      .addEventListener(
-        "click",
-        () => {
-          participants.push({
-            id: makeId(),
-            name: "",
-            paid: false,
-            inStepUp: false,
-            notes: ""
-          });
-
-          saveParticipants();
-          render();
-
-          const inputs =
-            document.querySelectorAll(
-              ".participant-name"
-            );
-
-          inputs[
-            inputs.length - 1
-          ]?.focus();
-        }
-      );
-
-    document
-      .getElementById("export-backup")
-      .addEventListener(
-        "click",
-        () => {
-          downloadFile(
-            "boo-basket-participants-backup.json",
-            JSON.stringify(
-              {
-                exportedAt:
-                  new Date().toISOString(),
-                participants
-              },
-              null,
-              2
-            ),
-            "application/json"
-          );
-        }
-      );
-
-    document
-      .getElementById("export-stats")
-      .addEventListener(
-        "click",
-        () => {
-          const totalParticipants =
-            participants.length;
-
-          const paidParticipants =
-            participants.filter(
-              participant =>
-                participant.paid
-            ).length;
-
-          const output =
-`// Public aggregate challenge stats.
-// Generated from the private Boo Basket participant tracker.
-// No participant names, notes, or contact information are included.
-
-window.BOO_BASKET_STATS = {
-  totalParticipants: ${totalParticipants},
-  paidParticipants: ${paidParticipants},
-  entryFee: ${ENTRY_FEE}
-};
-`;
-
-          downloadFile(
-            "challenge-stats.js",
-            output,
-            "text/javascript"
-          );
-        }
-      );
-
-    render();
+    loadParticipants();
   </script>
 </body>
 </html>
